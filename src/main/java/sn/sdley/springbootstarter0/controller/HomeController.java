@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0;
+package sn.sdley.springbootstarter0.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
