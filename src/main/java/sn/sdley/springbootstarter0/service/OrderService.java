@@ -1,5 +1,8 @@
 package sn.sdley.springbootstarter0.service;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class OrderService {
     private final PaymentService paymentService;
 

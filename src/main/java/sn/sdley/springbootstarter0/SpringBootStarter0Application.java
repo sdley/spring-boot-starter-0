@@ -2,6 +2,7 @@ package sn.sdley.springbootstarter0;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import sn.sdley.springbootstarter0.service.OrderService;
 import sn.sdley.springbootstarter0.service.PayPalPaymentService;
 import sn.sdley.springbootstarter0.service.StripePaymentService;
@@ -10,10 +11,8 @@ import sn.sdley.springbootstarter0.service.StripePaymentService;
 public class SpringBootStarter0Application {
 
     public static void main(String[] args) {
-//        SpringApplication.run(SpringBootStarter0Application.class, args);
-        var orderService = new OrderService(new PayPalPaymentService());
-//        orderService.setPaymentService(new PayPalPaymentService()); // uncomment this line to avoid NullPointerException in case
-//                                                                      // you switched to setter injection...
+        ApplicationContext context = SpringApplication.run(SpringBootStarter0Application.class, args);
+        var orderService = context.getBean(OrderService.class);
         orderService.placeOrder();
     }
 
