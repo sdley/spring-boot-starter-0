@@ -11,7 +11,9 @@ public class SpringBootStarter0Application {
 
     public static void main(String[] args) {
 //        SpringApplication.run(SpringBootStarter0Application.class, args);
-        var orderService = new OrderService(new PayPalPaymentService());
+        var orderService = new OrderService();
+//        orderService.setPaymentService(new PayPalPaymentService()); // uncomment this line to avoid NullPointerException in case
+//                                                                      // you switched to setter injection...
         orderService.placeOrder();
     }
 
