@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: "spring-boot-starter-0"
+  datasource:
+    url: "jdbc:mysql://localhost:3306/app_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true"
+    username: "app_user"
+    password: "app_password"
+  jpa:
+    database:
+      platform: "org.hibernate.dialect.MySQLDialect"
+app:
+  page:
+    size: "10"
+flyway:
+  user: "root"
+  password: "root"
