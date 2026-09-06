@@ -28,6 +28,9 @@
     </scm>
     <properties>
         <java.version>25</java.version>
+        <DB_URL>jdbc:mysql://localhost:3306/app_db?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC&amp;createDatabaseIfNotExist=true</DB_URL>
+        <DB_USERNAME>app_user</DB_USERNAME>
+        <DB_PASSWORD>app_password</DB_PASSWORD>
     </properties>
     <dependencies>
         <dependency>
@@ -75,12 +78,31 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>${project.basedir}/.env</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <configuration>
-                    <url>jdbc:mysql://localhost:3306/app_db?createDatabaseIfNotExist=true</url>
-                    <user>app_user</user>
-                    <password>app_password</password>
+                    <url>${DB_URL}</url>
+                    <user>${DB_USERNAME}</user>
+                    <password>${DB_PASSWORD}</password>
                     <cleanDisabled>false</cleanDisabled>
                 </configuration>
             </plugin>
