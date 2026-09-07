@@ -1,9 +1,12 @@
 package sn.sdley.springbootstarter0.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Getter
 @Setter
 @Entity
@@ -20,4 +23,9 @@ public class Address {
     private String state;
     @Column(name = "zip")
     private String zipCode;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @ToString.Exclude
+    private User user;
 }
