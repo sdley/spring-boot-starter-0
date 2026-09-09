@@ -18,6 +18,9 @@ public class Product {
 
     private String name;
 
+    @Column(name = "description", columnDefinition = "TEXT", nullable = false)
+    private String description;
+
     private BigDecimal price;
 
     @ManyToOne
