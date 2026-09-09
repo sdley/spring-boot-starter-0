@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import sn.sdley.springbootstarter0.entities.Address;
+import sn.sdley.springbootstarter0.entities.Profile;
 import sn.sdley.springbootstarter0.entities.Tag;
 import sn.sdley.springbootstarter0.entities.User;
 import sn.sdley.springbootstarter0.service.OrderService;
@@ -22,7 +23,14 @@ public class SpringBootStarter0Application {
                 .password("password123")
                 .build();
 
-        user.addTag("tag1");
+        var profile = Profile.builder()
+                .bio("Software Developer")
+                .phoneNumber("123-456-7890")
+                .loyaltyPoints(100)
+                .build();
+
+        user.setProfile(profile);
+        profile.setUser(user);
 
         System.out.println(user);
     }
