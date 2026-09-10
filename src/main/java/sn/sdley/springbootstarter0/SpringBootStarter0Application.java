@@ -7,6 +7,7 @@ import sn.sdley.springbootstarter0.entities.Address;
 import sn.sdley.springbootstarter0.entities.Profile;
 import sn.sdley.springbootstarter0.entities.Tag;
 import sn.sdley.springbootstarter0.entities.User;
+import sn.sdley.springbootstarter0.repositories.UserRepository;
 import sn.sdley.springbootstarter0.service.OrderService;
 import sn.sdley.springbootstarter0.service.PayPalPaymentService;
 import sn.sdley.springbootstarter0.service.StripePaymentService;
@@ -15,24 +16,12 @@ import sn.sdley.springbootstarter0.service.StripePaymentService;
 public class SpringBootStarter0Application {
 
     public static void main(String[] args) {
-//        ApplicationContext context = SpringApplication.run(SpringBootStarter0Application.class, args);
-        // Creating a new with builder pattern
-        User user = User.builder()
-                .name("John Doe")
-                .email("john.doe@example.com")
-                .password("password123")
-                .build();
+        ApplicationContext context = SpringApplication.run(SpringBootStarter0Application.class, args);
 
-        var profile = Profile.builder()
-                .bio("Software Developer")
-                .phoneNumber("123-456-7890")
-                .loyaltyPoints(100)
-                .build();
+        var repository = context.getBean(UserRepository.class);
 
-        user.setProfile(profile);
-        profile.setUser(user);
+        repository.findAll().forEach(u -> System.out.println(u.getName() + " - " + u.getEmail()));
 
-        System.out.println(user);
     }
 
 }

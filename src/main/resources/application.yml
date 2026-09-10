@@ -9,6 +9,7 @@ spring:
     password: ${DB_PASSWORD:app_password}
   jpa:
     database-platform: ${JPA_DATABASE_PLATFORM:org.hibernate.dialect.MySQLDialect}
+    show-sql: true
 
 app:
   page:
