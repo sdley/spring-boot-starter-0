@@ -3,6 +3,8 @@ package sn.sdley.springbootstarter0.repositories;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import sn.sdley.springbootstarter0.dtos.ProductSummary;
+import sn.sdley.springbootstarter0.entities.Category;
 import sn.sdley.springbootstarter0.entities.Product;
 
 import java.math.BigDecimal;
@@ -55,6 +57,8 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     // JPQL
     @Query("SELECT p from Product p where p.price between :min and :max order by p.name")
     List<Product> findProductsJPQL(@Param("min") BigDecimal min, @Param("max") BigDecimal max);
+
+    List<ProductSummary> findByCategory(Category category);
 
 
 
