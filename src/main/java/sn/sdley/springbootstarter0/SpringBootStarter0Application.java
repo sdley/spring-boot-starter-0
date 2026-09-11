@@ -11,6 +11,7 @@ import sn.sdley.springbootstarter0.repositories.UserRepository;
 import sn.sdley.springbootstarter0.service.OrderService;
 import sn.sdley.springbootstarter0.service.PayPalPaymentService;
 import sn.sdley.springbootstarter0.service.StripePaymentService;
+import sn.sdley.springbootstarter0.service.UserService;
 
 @SpringBootApplication
 public class SpringBootStarter0Application {
@@ -21,6 +22,9 @@ public class SpringBootStarter0Application {
         var repository = context.getBean(UserRepository.class);
 
         repository.findAll().forEach(u -> System.out.println(u.getName() + " - " + u.getEmail()));
+
+        var service = context.getBean(UserService.class);
+        service.fetchProducts();
 
     }
 

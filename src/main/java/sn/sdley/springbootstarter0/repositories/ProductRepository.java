@@ -1,6 +1,7 @@
 package sn.sdley.springbootstarter0.repositories;
 
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import sn.sdley.springbootstarter0.dtos.ProductSummary;
@@ -59,6 +60,10 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     List<Product> findProductsJPQL(@Param("min") BigDecimal min, @Param("max") BigDecimal max);
 
     List<ProductSummary> findByCategory(Category category);
+
+    // Stored Procedure
+    @Procedure("findProductsByPrice")
+    List<Product> findProducts(BigDecimal min, BigDecimal max);
 
 
 
