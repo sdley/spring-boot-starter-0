@@ -10,24 +10,27 @@ import java.util.Set;
 
 @Setter
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@NoArgsConstructor
 @Builder
 @Entity
 @Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-    @Column(nullable = false, name = "name")
+
+    @Column(name = "name")
     private String name;
-    @Column(nullable = false, name = "email")
+
+    @Column(name = "email")
     private String email;
-    @Column(nullable = false, name = "password")
+
+    @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     @Builder.Default
     private List<Address> addresses = new ArrayList<>();
 
@@ -41,22 +44,7 @@ public class User {
         address.setUser(null);
     }
 
-    public void addTag(String tag) {
-        Tag newTag = new Tag(tag);
-        tags.add(newTag);
-        newTag.getUsers().add(this);
-    }
-
-    @ManyToMany
-    @JoinTable(
-            name = "user_tags",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id")
-    )
-    @Builder.Default
-    private Set<Tag> tags = new HashSet<>();
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
     private Profile profile;
 
     @ManyToMany
@@ -65,7 +53,18 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    @Builder.Default
     private Set<Product> favoriteProducts = new HashSet<>();
 
+    public void addFavoriteProduct(Product product) {
+        favoriteProducts.add(product);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "id = " + id + ", " +
+                "name = " + name + ", " +
+                "email = " + email + ")";
+    }
 }
+

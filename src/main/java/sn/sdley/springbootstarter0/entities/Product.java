@@ -1,31 +1,33 @@
 package sn.sdley.springbootstarter0.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Getter
 @Setter
-@ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "products")
 public class Product {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "description", columnDefinition = "TEXT", nullable = false)
+    @Column(name = "description")
     private String description;
 
+    @Column(name = "price")
     private BigDecimal price;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "category_id")
     private Category category;
 }
