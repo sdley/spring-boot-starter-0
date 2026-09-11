@@ -24,7 +24,7 @@ public class SpringBootStarter0Application {
         repository.findAll().forEach(u -> System.out.println(u.getName() + " - " + u.getEmail()));
 
         var service = context.getBean(UserService.class);
-        service.fetchProducts();
+        service.fetchPaginatedProducts(0, 10);
 
     }
 

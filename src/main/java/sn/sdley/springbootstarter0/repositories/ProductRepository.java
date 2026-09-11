@@ -1,8 +1,8 @@
 package sn.sdley.springbootstarter0.repositories;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import sn.sdley.springbootstarter0.dtos.ProductSummary;
 import sn.sdley.springbootstarter0.entities.Category;
@@ -11,7 +11,7 @@ import sn.sdley.springbootstarter0.entities.Product;
 import java.math.BigDecimal;
 import java.util.List;
 
-public interface ProductRepository extends CrudRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
     // String
     List<Product> findByName(String name);
