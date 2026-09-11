@@ -1,5 +1,7 @@
 package sn.sdley.springbootstarter0.service;
 
+import sn.sdley.springbootstarter0.repositories.PaymentService;
+
 public class StripePaymentService implements PaymentService {
     @Override
     public void processPayment(double amount) {

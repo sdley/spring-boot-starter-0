@@ -1,6 +1,7 @@
 package sn.sdley.springbootstarter0.service;
 
 import org.springframework.stereotype.Service;
+import sn.sdley.springbootstarter0.repositories.PaymentService;
 
 @Service
 public class PayPalPaymentService implements PaymentService {
