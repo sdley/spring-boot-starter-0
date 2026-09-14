@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sn.sdley.springbootstarter0.dtos.UserDto;
-import sn.sdley.springbootstarter0.entities.User;
+import sn.sdley.springbootstarter0.mappers.UserMapper;
 import sn.sdley.springbootstarter0.repositories.UserRepository;
 
 @RestController
@@ -16,10 +16,15 @@ import sn.sdley.springbootstarter0.repositories.UserRepository;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     @GetMapping
     public Iterable<UserDto> getAllUsers() {
-        return userRepository.findAll().stream().map(user -> new UserDto(user.getId(), user.getName(), user.getEmail())).toList();
+        return userRepository.findAll()
+                .stream()
+                // .map(user -> userMapper.toDto(user))
+                .map(userMapper::toDto)
+                .toList();
     }
 
     @GetMapping("/{id}")
@@ -29,6 +34,6 @@ public class UserController {
         if  (user == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(new UserDto(user.getId(), user.getName(), user.getEmail()));
+        return ResponseEntity.ok(userMapper.toDto(user));
     }
 }
