@@ -14,6 +14,8 @@ spring:
 app:
   page:
     size: ${APP_PAGE_SIZE:10}
+  seed:
+    enabled: ${APP_SEED_ENABLED:false}
 
 flyway:
   user: ${FLYWAY_USER:root}
