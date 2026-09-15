@@ -23,7 +23,7 @@ public class UserController {
 
     @GetMapping
     public Iterable<UserDto> getAllUsers(
-            @RequestParam (required = false, defaultValue = "", name = "sort") String sortBy
+            @RequestParam(required = false, defaultValue = "", name = "sort") String sortBy
     ) {
         if (!Set.of("name", "email").contains(sortBy)) {
             sortBy = "id";
@@ -40,7 +40,7 @@ public class UserController {
     public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
         var user = userRepository.findById(id).orElse(null);
 
-        if  (user == null) {
+        if (user == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(userMapper.toDto(user));
@@ -61,7 +61,7 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<UserDto> updateUser(
             @PathVariable(name = "id") Long id,
-            @RequestBody UpdateUserRequest request){
+            @RequestBody UpdateUserRequest request) {
         var user = userRepository.findById(id).orElse(null);
         if (user == null) {
             return ResponseEntity.notFound().build();
@@ -73,5 +73,14 @@ public class UserController {
         return ResponseEntity.ok(userMapper.toDto(user));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        var user = userRepository.findById(id).orElse(null);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
 
+        userRepository.delete(user);
+        return ResponseEntity.noContent().build();
+    }
 }
