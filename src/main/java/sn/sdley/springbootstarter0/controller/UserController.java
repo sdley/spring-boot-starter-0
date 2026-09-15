@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+import sn.sdley.springbootstarter0.dtos.RegisterUserRequest;
+import sn.sdley.springbootstarter0.dtos.UpdateUserRequest;
 import sn.sdley.springbootstarter0.dtos.UserDto;
 import sn.sdley.springbootstarter0.mappers.UserMapper;
 import sn.sdley.springbootstarter0.repositories.UserRepository;
@@ -42,4 +45,33 @@ public class UserController {
         }
         return ResponseEntity.ok(userMapper.toDto(user));
     }
+
+    @PostMapping
+    public ResponseEntity<UserDto> createUser(
+            @RequestBody RegisterUserRequest request,
+            UriComponentsBuilder uriComponentsBuilder
+    ) {
+        var user = userMapper.toEntity(request);
+        user = userRepository.save(user);
+        var userDto = userMapper.toDto(user);
+        var location = uriComponentsBuilder.path("/users/{id}").buildAndExpand(userDto.getId()).toUri();
+        return ResponseEntity.created(location).body(userDto);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDto> updateUser(
+            @PathVariable(name = "id") Long id,
+            @RequestBody UpdateUserRequest request){
+        var user = userRepository.findById(id).orElse(null);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        userMapper.update(request, user);
+        user = userRepository.save(user);
+
+        return ResponseEntity.ok(userMapper.toDto(user));
+    }
+
+
 }
