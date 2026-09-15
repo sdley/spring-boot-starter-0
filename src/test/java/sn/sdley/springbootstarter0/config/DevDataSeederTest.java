@@ -54,10 +54,10 @@ class DevDataSeederTest {
         org.mockito.Mockito.verify(userRepository).saveAll(usersCaptor.capture());
         org.mockito.Mockito.verify(profileRepository).saveAll(profilesCaptor.capture());
 
-        assertThat(StreamSupport.stream(categoriesCaptor.getValue().spliterator(), false)).hasSize(3);
-        assertThat(StreamSupport.stream(productsCaptor.getValue().spliterator(), false)).hasSize(4);
-        assertThat(StreamSupport.stream(usersCaptor.getValue().spliterator(), false)).hasSize(3);
-        assertThat(StreamSupport.stream(profilesCaptor.getValue().spliterator(), false)).hasSize(3);
+        assertThat(StreamSupport.stream(categoriesCaptor.getValue().spliterator(), false)).hasSize(10);
+        assertThat(StreamSupport.stream(productsCaptor.getValue().spliterator(), false)).hasSize(15);
+        assertThat(StreamSupport.stream(usersCaptor.getValue().spliterator(), false)).hasSize(12);
+        assertThat(StreamSupport.stream(profilesCaptor.getValue().spliterator(), false)).hasSize(12);
     }
 
     @Test
