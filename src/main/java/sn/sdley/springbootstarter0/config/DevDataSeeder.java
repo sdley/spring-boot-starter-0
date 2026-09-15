@@ -1,6 +1,8 @@
 package sn.sdley.springbootstarter0.config;
 
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -23,6 +25,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DevDataSeeder implements ApplicationRunner {
 
+    private static final Logger log = LoggerFactory.getLogger(DevDataSeeder.class);
+
     private final SeedProperties seedProperties;
     private final UserRepository userRepository;
     private final ProfileRepository profileRepository;
@@ -32,9 +36,17 @@ public class DevDataSeeder implements ApplicationRunner {
     @Override
     @Transactional
     public void run(ApplicationArguments args) {
-        if (!seedProperties.enabled() || hasExistingData()) {
+        if (!seedProperties.enabled()) {
+            log.info("Application data seeding is disabled.");
             return;
         }
+
+        if (hasExistingData()) {
+            log.info("Application data seeding skipped because existing data was found.");
+            return;
+        }
+
+        log.info("Application data seeding is enabled. Starting seed process.");
 
         Category electronics = new Category("Electronics");
         Category books = new Category("Books");
@@ -139,6 +151,8 @@ public class DevDataSeeder implements ApplicationRunner {
                         .loyaltyPoints(240)
                         .build()
         ));
+
+        log.info("Application data seeding completed successfully.");
     }
 
     private boolean hasExistingData() {
