@@ -26,7 +26,7 @@ public class ProductController {
             @RequestParam(name = "categoryId", required = false) Byte categoryId
     ) {
         List<Product> products;
-        if  (categoryId != null) {
+        if (categoryId != null) {
             products = productRepository.findByCategoryId(categoryId);
         } else {
             products = productRepository.findAllWithCategory();
@@ -70,7 +70,7 @@ public class ProductController {
             return ResponseEntity.badRequest().build();
         }
 
-        var  product = productRepository.findById(id).orElse(null);
+        var product = productRepository.findById(id).orElse(null);
         if (product == null) {
             return ResponseEntity.notFound().build();
         }
@@ -81,6 +81,17 @@ public class ProductController {
         productDto.setId(product.getId());
 
         return ResponseEntity.ok(productDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+        var product = productRepository.findById(id).orElse(null);
+        if (product == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        productRepository.delete(product);
+        return ResponseEntity.noContent().build();
     }
 
 }
