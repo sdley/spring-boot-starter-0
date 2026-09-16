@@ -9,4 +9,6 @@ import sn.sdley.springbootstarter0.entities.Product;
 public interface ProductMapper {
     @Mapping(source = "category.id", target = "categoryId")
     ProductDto toDto(Product product);
+
+    Product toEntity(ProductDto productDto);
 }
