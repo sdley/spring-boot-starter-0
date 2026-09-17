@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import sn.sdley.springbootstarter0.dtos.ChangePasswordRequest;
@@ -16,10 +14,8 @@ import sn.sdley.springbootstarter0.dtos.UserDto;
 import sn.sdley.springbootstarter0.mappers.UserMapper;
 import sn.sdley.springbootstarter0.repositories.UserRepository;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
@@ -55,10 +51,16 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> createUser(
+    public ResponseEntity<?> registerUser(
             @Valid @RequestBody RegisterUserRequest request,
             UriComponentsBuilder uriComponentsBuilder
     ) {
+        if (userRepository.existsByEmail(request.getEmail())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(
+                    Map.of("error", "Email already exists")
+            );
+        }
+
         var user = userMapper.toEntity(request);
         user = userRepository.save(user);
         var userDto = userMapper.toDto(user);
