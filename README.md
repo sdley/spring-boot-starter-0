@@ -1,79 +1,81 @@
 # Spring Boot Starter 0
 
-A Spring Boot fundamentals project demonstrating modern configuration patterns, environment-based secrets management, and database migration setup using Flyway.
+An opinionated Spring Boot CRUD starter for building a small product catalog and user management API with MySQL, Flyway, Thymeleaf, and MapStruct.
 
-## Overview
+It is intentionally practical: the app boots, serves a simple home page, exposes REST endpoints for users and products, seeds demo data when enabled, and keeps schema changes versioned.
 
-This project is designed to teach and practice the core building blocks of a Spring Boot application:
+## What’s inside
 
-- Spring Boot application bootstrap
-- YAML-based configuration
-- externalized secrets via `.env`
-- MySQL database connectivity
-- Flyway database migrations
-- configuration binding with `@ConfigurationProperties`
-- layered project organization with controllers, services, and config classes
-
-## Tech Stack
-
+- Spring Boot 4.1
 - Java 25
-- Spring Boot 4.1.0
 - Maven
-- MySQL 8.4
-- Flyway
-- Docker Compose
+- MySQL + Flyway migrations
+- REST APIs for users and products
+- Thymeleaf home page and a simple `/hello` endpoint
+- DTO mapping with MapStruct
+- Validation and centralized exception handling
+- Optional dev data seeding
 
-## Prerequisites
+## Features
 
-Before running the project, make sure you have:
+### Users
 
-- JDK 25 or newer installed
-- Maven available via the included `mvnw` wrapper
-- Docker Desktop or Docker Engine available if you want to run MySQL in a container
+- list users with optional sorting
+- fetch a user by id
+- register a user
+- update or delete a user
+- change password
 
-## Project Structure
+### Products
+
+- list products, optionally filtered by category
+- fetch a product by id
+- create, update, and delete products
+
+### Web
+
+- `GET /` renders a basic Thymeleaf home page
+- `GET /hello` returns a simple JSON greeting
+
+## Project layout
 
 ```text
-spring-boot-starter-0/
-├── .env.example
-├── .env
-├── .gitignore
-├── docker-compose.yml
-├── pom.xml
-├── mvnw
-├── README.md
-├── src/
-│   └── main/
-│       ├── java/
-│       │   └── sn/sdley/springbootstarter0/
-│       │       ├── config/
-│       │       │   └── AppProperties.java
-│       │       ├── controller/
-│       │       │   └── HomeController.java
-│       │       ├── service/
-│       │       │   ├── OrderService.java
-│       │       │   ├── PayPalPaymentService.java
-│       │       │   ├── PaymentService.java
-│       │       │   └── StripePaymentService.java
-│       │       └── SpringBootStarter0Application.java
-│       └── resources/
-│           ├── application.yml
-│           └── static/
-│               └── index.html
-└── target/
+src/main/java/sn/sdley/springbootstarter0/
+├── config/
+├── controller/
+├── dtos/
+├── entities/
+├── mappers/
+├── repositories/
+└── validation/
+
+src/main/resources/
+├── application.yml
+├── db/migration/
+└── templates/
 ```
 
-## Configuration and Secrets Management
+## Requirements
 
-The project uses Spring Boot YAML configuration in `src/main/resources/application.yml` and reads environment-specific values from a local `.env` file.
+- JDK 25
+- Maven
+- MySQL 8+
 
-### 1. Create your local environment file
+## Configuration
 
-Copy the example file and fill in your own values:
+Application settings live in `src/main/resources/application.yml` and can be overridden with environment variables or a local `.env` file.
 
-```bash
-cp .env.example .env
-```
+Key values:
+
+- `APP_NAME`
+- `DB_URL`
+- `DB_USERNAME`
+- `DB_PASSWORD`
+- `JPA_DATABASE_PLATFORM`
+- `APP_PAGE_SIZE`
+- `APP_SEED_ENABLED`
+- `FLYWAY_USER`
+- `FLYWAY_PASSWORD`
 
 Example `.env`:
 
@@ -84,115 +86,46 @@ DB_USERNAME=app_user
 DB_PASSWORD=app_password
 JPA_DATABASE_PLATFORM=org.hibernate.dialect.MySQLDialect
 APP_PAGE_SIZE=10
+APP_SEED_ENABLED=false
 FLYWAY_USER=root
 FLYWAY_PASSWORD=root
 ```
 
-Important best practices:
-
-- Commit only `.env.example`
-- Never commit `.env`
-- Keep production credentials in a secure secret manager or environment injection system
-- Use defaults only for non-sensitive, safe values
-
-The repository `.gitignore` excludes `.env` files so secrets stay out of Git history.
-
-## Database Setup
-
-This app expects a MySQL instance running locally.
-
-### Option 1: Docker Compose
-
-Start the database container:
-
-```bash
-docker compose up -d mysql
-```
-
-The configuration in `docker-compose.yml` starts MySQL with:
-
-- database: `app_db`
-- username: `app_user`
-- password: `app_password`
-
-### Option 2: Local MySQL
-
-If you already have MySQL installed and running, make sure the database and credentials match your `.env` file.
-
-## Running the Application
-
-Run the application with Maven:
+## Run locally
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-The app starts on:
+Then open:
 
 ```text
 http://localhost:8080
 ```
 
-## Flyway Maven Plugin Setup
+## API quick tour
 
-Flyway is configured in `pom.xml` so it can read the same database credentials used by the application without hardcoding sensitive values in source control.
+| Method | Path | Description |
+| --- | --- | --- |
+| GET | `/users` | List users |
+| GET | `/users/{id}` | Get one user |
+| POST | `/users` | Register a user |
+| PUT | `/users/{id}` | Update a user |
+| DELETE | `/users/{id}` | Delete a user |
+| POST | `/users/{id}/change-password` | Change password |
+| GET | `/products` | List products |
+| GET | `/products?categoryId=1` | List products by category |
+| GET | `/products/{id}` | Get one product |
+| POST | `/products` | Create a product |
+| PUT | `/products/{id}` | Update a product |
+| DELETE | `/products/{id}` | Delete a product |
+| GET | `/hello` | Return a greeting |
 
-This project uses the `properties-maven-plugin` during the `initialize` phase to load values from `.env`, then the Flyway plugin uses those properties.
+## Database and migrations
 
-### Why this approach is preferred
+Flyway manages schema changes from `src/main/resources/db/migration`. The default setup expects a local MySQL database, and the Maven Flyway plugin reuses the same credentials as the app.
 
-- secrets are not copied into the POM
-- the same credentials are reused across the app and database migration tooling
-- local development remains simple
-- CI and production environments can inject values through environment variables
-
-### Maven configuration example
-
-```xml
-<properties>
-    <DB_URL>jdbc:mysql://localhost:3306/app_db?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC&amp;createDatabaseIfNotExist=true</DB_URL>
-    <DB_USERNAME>app_user</DB_USERNAME>
-    <DB_PASSWORD>app_password</DB_PASSWORD>
-</properties>
-
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>properties-maven-plugin</artifactId>
-            <version>1.2.1</version>
-            <executions>
-                <execution>
-                    <phase>initialize</phase>
-                    <goals>
-                        <goal>read-project-properties</goal>
-                    </goals>
-                    <configuration>
-                        <files>
-                            <file>${project.basedir}/.env</file>
-                        </files>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-
-        <plugin>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-maven-plugin</artifactId>
-            <configuration>
-                <url>${DB_URL}</url>
-                <user>${DB_USERNAME}</user>
-                <password>${DB_PASSWORD}</password>
-                <cleanDisabled>false</cleanDisabled>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
-```
-
-### Running Flyway commands
-
-Common Flyway operations:
+Common commands:
 
 ```bash
 ./mvnw flyway:info
@@ -200,42 +133,11 @@ Common Flyway operations:
 ./mvnw flyway:clean
 ```
 
-Use `flyway:clean` only in development or disposable environments. Do not use it in production unless you are intentionally resetting the database.
-
-## Application Configuration Pattern
-
-The project uses a typed configuration bean for nested application values:
-
-```java
-@Component
-@ConfigurationProperties(prefix = "app")
-public class AppProperties {
-    private Page page = new Page();
-}
-```
-
-This matches the YAML structure:
-
-```yaml
-app:
-  page:
-    size: ${APP_PAGE_SIZE:10}
-```
-
-This is cleaner and safer than repeatedly referencing raw placeholder keys in many classes.
+Use `clean` only in disposable environments.
 
 ## Notes
 
-- The application reads environment properties from `.env` using Spring Boot import rules.
-- The Flyway plugin uses the same base values to avoid config drift.
-- This project is intentionally simple and instructional, making it a good starting point for learning Spring fundamentals.
+- Passwords are stored plainly in the current implementation; replace that before production use.
+- Demo data can be enabled through `APP_SEED_ENABLED=true`.
+- This starter is best suited as a learning or internal prototype base.
 
-## Contributing
-
-If you are extending the project:
-
-1. keep configuration externalized
-2. avoid committing secrets
-3. use typed configuration objects for application properties
-4. keep migrations versioned and explicit
-5. prefer environment variables or secret managers over hardcoded values
