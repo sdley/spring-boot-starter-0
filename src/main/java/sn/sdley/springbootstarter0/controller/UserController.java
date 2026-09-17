@@ -1,9 +1,12 @@
 package sn.sdley.springbootstarter0.controller;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import sn.sdley.springbootstarter0.dtos.ChangePasswordRequest;
@@ -13,7 +16,10 @@ import sn.sdley.springbootstarter0.dtos.UserDto;
 import sn.sdley.springbootstarter0.mappers.UserMapper;
 import sn.sdley.springbootstarter0.repositories.UserRepository;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
@@ -50,7 +56,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserDto> createUser(
-            @RequestBody RegisterUserRequest request,
+            @Valid @RequestBody RegisterUserRequest request,
             UriComponentsBuilder uriComponentsBuilder
     ) {
         var user = userMapper.toEntity(request);
@@ -103,5 +109,16 @@ public class UserController {
         userRepository.save(user);
         return ResponseEntity.noContent().build();
 
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, String>> handleValidationErrors(
+            MethodArgumentNotValidException exception
+    ) {
+        var errors = new HashMap<String, String>();
+
+        exception.getBindingResult().getFieldErrors()
+                .forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
+        return ResponseEntity.badRequest().body(errors);
     }
 }
