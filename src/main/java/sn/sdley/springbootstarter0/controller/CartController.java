@@ -1,5 +1,8 @@
 package sn.sdley.springbootstarter0.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,11 +23,13 @@ import java.util.UUID;
 @AllArgsConstructor
 @RestController
 @RequestMapping("carts")
+@Tag(name = "Carts", description = "Endpoints for managing shopping carts")
 public class CartController {
 
     private final CartService cartService;
 
     @PostMapping
+    @Operation(summary = "Create a new cart", description = "Creates a new shopping cart and returns its details.")
     public ResponseEntity<CartDto> createCart(
             UriComponentsBuilder uriComponentsBuilder
     ) {
@@ -35,7 +40,9 @@ public class CartController {
     }
 
     @PostMapping("/{cartId}/items")
+    @Operation(summary = "Add an item to the cart", description = "Adds a product to the specified shopping cart and returns the updated cart item details.")
     public ResponseEntity<CartItemDto> addItemToCart(
+            @Parameter(description = "The ID of the cart to which the item will be added", required = true)
             @PathVariable UUID cartId,
             @RequestBody AddItemToCartRequest request
     ){
@@ -46,11 +53,13 @@ public class CartController {
     }
 
     @GetMapping("/{cartId}")
+    @Operation(summary = "Get a cart", description = "Retrieves the details of the specified shopping cart.")
     public CartDto getCart(@PathVariable UUID cartId) {
         return cartService.getCart(cartId);
     }
 
     @PutMapping("/{cartId}/items/{productId}")
+    @Operation(summary = "Update a cart item", description = "Updates the quantity of a specific product in the specified shopping cart and returns the updated cart item details.")
     public CartItemDto updateCartItem(
             @PathVariable("cartId") UUID cartId,
             @PathVariable("productId") Long productId,
@@ -60,6 +69,7 @@ public class CartController {
     }
 
     @DeleteMapping("/{cartId}/items/{productId}")
+    @Operation(summary = "Remove a cart item", description = "Removes a specific product from the specified shopping cart.")
     public ResponseEntity<?> removeItem(
             @PathVariable("cartId") UUID cartId,
             @PathVariable("productId") Long productId
@@ -70,6 +80,7 @@ public class CartController {
     }
 
     @DeleteMapping("/{cartId}/items")
+    @Operation(summary = "Clear a cart", description = "Removes all items from the specified shopping cart.")
     public ResponseEntity<?> clearCart(@PathVariable("cartId") UUID cartId) {
         cartService.clearCart(cartId);
 
