@@ -12,6 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import sn.sdley.springbootstarter0.config.JwtConfig;
 import sn.sdley.springbootstarter0.dtos.JwtResponse;
 import sn.sdley.springbootstarter0.dtos.LoginRequest;
 import sn.sdley.springbootstarter0.dtos.UserDto;
@@ -25,6 +26,7 @@ import sn.sdley.springbootstarter0.service.JwtService;
 public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
+    private final JwtConfig jwtConfig;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
@@ -45,7 +47,7 @@ public class AuthController {
         var cookie = new Cookie("refreshToken", refreshToken);
         cookie.setHttpOnly(true);
         cookie.setPath("/auth/refresh");
-        cookie.setMaxAge(7 * 24 * 60 * 60); // 7 days in seconds
+        cookie.setMaxAge((int) jwtConfig.getRefreshTokenExpiration());
         cookie.setSecure(true); // Set to true if using HTTPS
         response.addCookie(cookie);
 
