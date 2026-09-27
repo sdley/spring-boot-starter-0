@@ -7,10 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import sn.sdley.springbootstarter0.dtos.JwtResponse;
 import sn.sdley.springbootstarter0.dtos.LoginRequest;
+import sn.sdley.springbootstarter0.dtos.UserDto;
 import sn.sdley.springbootstarter0.mappers.UserMapper;
 import sn.sdley.springbootstarter0.repositories.UserRepository;
 import sn.sdley.springbootstarter0.service.JwtService;
@@ -47,9 +49,10 @@ public class AuthController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<?> getCurrentUser() {
-        var authentication = SecurityContextHolder.getContext().getAuthentication();
-        var userId = (Long) authentication.getPrincipal();
+    public ResponseEntity<UserDto> getCurrentUser(@AuthenticationPrincipal Object principal) {
+        if (!(principal instanceof Long userId)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Authentication required");
+        }
 
         var user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
