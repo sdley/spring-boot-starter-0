@@ -7,6 +7,7 @@ import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import sn.sdley.springbootstarter0.config.JwtConfig;
+import sn.sdley.springbootstarter0.entities.Role;
 import sn.sdley.springbootstarter0.entities.User;
 
 import java.util.Date;
@@ -55,5 +56,9 @@ public class JwtService {
 
     public Long extractUserId(String token) {
         return Long.parseLong(getClaims(token).getSubject());
+    }
+
+    public Role extractUserRole(String token) {
+        return Role.valueOf(getClaims(token).get("role", String.class));
     }
 }
