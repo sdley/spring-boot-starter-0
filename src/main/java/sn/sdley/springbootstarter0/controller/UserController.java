@@ -18,6 +18,7 @@ import sn.sdley.springbootstarter0.dtos.ChangePasswordRequest;
 import sn.sdley.springbootstarter0.dtos.RegisterUserRequest;
 import sn.sdley.springbootstarter0.dtos.UpdateUserRequest;
 import sn.sdley.springbootstarter0.dtos.UserDto;
+import sn.sdley.springbootstarter0.entities.Role;
 import sn.sdley.springbootstarter0.mappers.UserMapper;
 import sn.sdley.springbootstarter0.repositories.UserRepository;
 
@@ -90,6 +91,7 @@ public class UserController {
 
         var user = userMapper.toEntity(request);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.USER);
         user = userRepository.save(user);
         var userDto = userMapper.toDto(user);
         var location = uriComponentsBuilder.path("/users/{id}").buildAndExpand(userDto.getId()).toUri();
