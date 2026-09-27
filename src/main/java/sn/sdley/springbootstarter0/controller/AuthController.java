@@ -7,9 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import sn.sdley.springbootstarter0.dtos.JwtResponse;
 import sn.sdley.springbootstarter0.dtos.LoginRequest;
+import sn.sdley.springbootstarter0.mappers.UserMapper;
+import sn.sdley.springbootstarter0.repositories.UserRepository;
 import sn.sdley.springbootstarter0.service.JwtService;
 
 @AllArgsConstructor
@@ -18,6 +21,8 @@ import sn.sdley.springbootstarter0.service.JwtService;
 public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(
@@ -37,6 +42,21 @@ public class AuthController {
         System.out.println("Validate token called with header: " + authHeader);
         var token = authHeader.replace("Bearer ", "");
         return jwtService.validateToken(token);
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<?> getCurrentUser() {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = null;
+        if (authentication != null) {
+            email = (String) authentication.getPrincipal();
+        }
+
+        var user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        var userDto = userMapper.toDto(user);
+        return ResponseEntity.ok(userDto);
     }
 
     @ExceptionHandler(BadCredentialsException.class)
