@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sn.sdley.springbootstarter0.dtos.CheckoutRequest;
 import sn.sdley.springbootstarter0.dtos.CheckoutResponse;
+import sn.sdley.springbootstarter0.dtos.ErrorDto;
 import sn.sdley.springbootstarter0.entities.Order;
 import sn.sdley.springbootstarter0.entities.OrderItem;
 import sn.sdley.springbootstarter0.entities.OrderStatus;
@@ -16,8 +17,6 @@ import sn.sdley.springbootstarter0.repositories.CartRepository;
 import sn.sdley.springbootstarter0.repositories.OrderRepository;
 import sn.sdley.springbootstarter0.service.AuthService;
 import sn.sdley.springbootstarter0.service.CartService;
-
-import java.util.Map;
 
 @AllArgsConstructor
 @RestController
@@ -35,13 +34,13 @@ public class CheckoutController {
        var cart = cartRepository.findById(request.getCartId()).orElse(null);
        if(cart == null) {
            return ResponseEntity.badRequest().body(
-                   Map.of("error", "Cart not found")
+                   new ErrorDto("Cart not found")
            );
        }
 
        if (cart.getItems().isEmpty()){
               return ResponseEntity.badRequest().body(
-                     Map.of("error", "Cart is empty")
+                     new ErrorDto("Cart is empty")
               );
        }
 
