@@ -1,4 +1,4 @@
-# Spring Boot Starter 0
+# Store Front Backend / Spring Boot Starter
 
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.0-brightgreen.svg)
 ![Java](https://img.shields.io/badge/Java-25-orange.svg)
