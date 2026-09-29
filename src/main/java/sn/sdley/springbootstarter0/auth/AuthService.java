@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0.service;
+package sn.sdley.springbootstarter0.auth;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;

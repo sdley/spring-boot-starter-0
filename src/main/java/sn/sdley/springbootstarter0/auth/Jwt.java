@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0.service;
+package sn.sdley.springbootstarter0.auth;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

@@ -8,7 +8,7 @@ import sn.sdley.springbootstarter0.exceptions.CartEmptyException;
 import sn.sdley.springbootstarter0.exceptions.CartNotFoundException;
 import sn.sdley.springbootstarter0.repositories.CartRepository;
 import sn.sdley.springbootstarter0.repositories.OrderRepository;
-import sn.sdley.springbootstarter0.service.AuthService;
+import sn.sdley.springbootstarter0.auth.AuthService;
 import sn.sdley.springbootstarter0.service.CartService;
 
 @RequiredArgsConstructor

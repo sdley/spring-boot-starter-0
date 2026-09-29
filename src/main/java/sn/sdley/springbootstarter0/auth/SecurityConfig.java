@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0.config;
+package sn.sdley.springbootstarter0.auth;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +20,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import sn.sdley.springbootstarter0.entities.Role;
-import sn.sdley.springbootstarter0.filters.JwtAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity

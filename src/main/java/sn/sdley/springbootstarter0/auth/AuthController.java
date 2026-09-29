@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0.controller;
+package sn.sdley.springbootstarter0.auth;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,13 +12,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import sn.sdley.springbootstarter0.config.JwtConfig;
-import sn.sdley.springbootstarter0.dtos.JwtResponse;
-import sn.sdley.springbootstarter0.dtos.LoginRequest;
 import sn.sdley.springbootstarter0.users.UserDto;
 import sn.sdley.springbootstarter0.users.UserMapper;
 import sn.sdley.springbootstarter0.users.UserRepository;
-import sn.sdley.springbootstarter0.service.JwtService;
 
 @AllArgsConstructor
 @RestController

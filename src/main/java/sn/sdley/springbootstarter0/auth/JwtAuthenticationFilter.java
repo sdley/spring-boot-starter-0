@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0.filters;
+package sn.sdley.springbootstarter0.auth;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -11,7 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import sn.sdley.springbootstarter0.service.JwtService;
 
 import java.io.IOException;
 import java.util.List;

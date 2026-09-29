@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0.config;
+package sn.sdley.springbootstarter0.auth;
 
 import io.jsonwebtoken.security.Keys;
 import lombok.Data;
