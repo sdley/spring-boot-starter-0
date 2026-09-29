@@ -11,6 +11,7 @@ import sn.sdley.storefrontbackend.admin.AdminController;
 import sn.sdley.storefrontbackend.common.HomeController;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.head;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -61,5 +62,32 @@ class SecurityConfigTest {
                 .andExpect(status().isUnauthorized());
         mockMvc.perform(post("/"))
                 .andExpect(status().isUnauthorized());
+        mockMvc.perform(get("/products"))
+                .andExpect(status().isUnauthorized());
+        mockMvc.perform(get("/orders"))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    void publicCartRegistrationLoginAndWebhookPathsPassSecurity() throws Exception {
+        mockMvc.perform(get("/carts/00000000-0000-0000-0000-000000000001"))
+                .andExpect(status().isNotFound());
+        mockMvc.perform(post("/users"))
+                .andExpect(status().isNotFound());
+        mockMvc.perform(post("/auth/login"))
+                .andExpect(status().isNotFound());
+        mockMvc.perform(post("/auth/refresh"))
+                .andExpect(status().isNotFound());
+        mockMvc.perform(post("/checkout/webhook"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void adminEndpointRequiresTheAdminRole() throws Exception {
+        mockMvc.perform(get("/admin/hello").with(user("customer").roles("USER")))
+                .andExpect(status().isForbidden());
+        mockMvc.perform(get("/admin/hello").with(user("admin").roles("ADMIN")))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Hello Admin!"));
     }
 }
