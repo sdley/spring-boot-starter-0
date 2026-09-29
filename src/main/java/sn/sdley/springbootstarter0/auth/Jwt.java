@@ -2,7 +2,7 @@ package sn.sdley.springbootstarter0.auth;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import sn.sdley.springbootstarter0.entities.Role;
+import sn.sdley.springbootstarter0.users.Role;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
