@@ -49,7 +49,7 @@ src/
 │       ├── db/migration/ # Flyway SQL migrations
 │       ├── templates/    # Public Thymeleaf landing page
 │       └── application.yml
-└── test/java/            # Application, authentication, and seeder tests
+└── test/java/            # Unit, MVC-slice, and MySQL integration tests
 ```
 
 ## Requirements
@@ -81,6 +81,8 @@ To run the tests:
 ```bash
 ./mvnw test
 ```
+
+The full test suite uses Testcontainers to start a disposable MySQL 8.4 database, so Docker must be running. Unit and MVC-slice tests do not need the local application database or Stripe credentials.
 
 ## Configuration
 
