@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/products")
 @Tag(name = "Products", description = "Endpoints for managing product catalog entries")
+@SecurityRequirement(name = "bearerAuth")
 public class ProductController {
 
     private final ProductRepository productRepository;
@@ -25,7 +27,10 @@ public class ProductController {
 
     @GetMapping
     @Operation(summary = "List products", description = "Retrieves all products, optionally filtered by category ID.")
-    @ApiResponse(responseCode = "200", description = "Products retrieved successfully")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Products retrieved successfully"),
+            @ApiResponse(responseCode = "401", description = "Authentication is required", content = @Content)
+    })
     public List<ProductDto> getAllProducts(
             @Parameter(description = "Optional category ID used to filter products")
             @RequestParam(name = "categoryId", required = false) Byte categoryId
@@ -43,6 +48,7 @@ public class ProductController {
     @Operation(summary = "Get a product", description = "Retrieves a product by its ID.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Product retrieved successfully"),
+            @ApiResponse(responseCode = "401", description = "Authentication is required", content = @Content),
             @ApiResponse(responseCode = "404", description = "Product does not exist", content = @Content)
     })
     public ResponseEntity<ProductDto> getProductById(
@@ -58,6 +64,7 @@ public class ProductController {
     @Operation(summary = "Create a product", description = "Creates a product in an existing category.")
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "Product created successfully"),
+            @ApiResponse(responseCode = "401", description = "Authentication is required", content = @Content),
             @ApiResponse(responseCode = "400", description = "Referenced category does not exist", content = @Content)
     })
     public ResponseEntity<ProductDto> createProduct(
@@ -83,6 +90,7 @@ public class ProductController {
     @Operation(summary = "Update a product", description = "Replaces a product's details and assigns it to an existing category.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Product updated successfully"),
+            @ApiResponse(responseCode = "401", description = "Authentication is required", content = @Content),
             @ApiResponse(responseCode = "400", description = "Referenced category does not exist", content = @Content),
             @ApiResponse(responseCode = "404", description = "Product does not exist", content = @Content)
     })
@@ -115,6 +123,7 @@ public class ProductController {
     @Operation(summary = "Delete a product", description = "Permanently deletes a product by its ID.")
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "Product deleted successfully"),
+            @ApiResponse(responseCode = "401", description = "Authentication is required", content = @Content),
             @ApiResponse(responseCode = "404", description = "Product does not exist", content = @Content)
     })
     public ResponseEntity<Void> deleteProduct(

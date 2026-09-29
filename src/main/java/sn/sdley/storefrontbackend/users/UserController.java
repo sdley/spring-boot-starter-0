@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -25,7 +26,11 @@ public class UserController {
 
     @GetMapping
     @Operation(summary = "List users", description = "Retrieves all users, sorted by ID, name, or email.")
-    @ApiResponse(responseCode = "200", description = "Users retrieved successfully")
+    @SecurityRequirement(name = "bearerAuth")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Users retrieved successfully"),
+            @ApiResponse(responseCode = "401", description = "Authentication is required", content = @Content)
+    })
     public Iterable<UserDto> getAllUsers(
             @Parameter(description = "Sort field: id, name, or email. Unsupported values default to id.")
             @RequestParam(required = false, defaultValue = "", name = "sort") String sortBy
@@ -35,8 +40,10 @@ public class UserController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Get a user", description = "Retrieves a user by its ID.")
+    @SecurityRequirement(name = "bearerAuth")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "User retrieved successfully"),
+            @ApiResponse(responseCode = "401", description = "Authentication is required", content = @Content),
             @ApiResponse(responseCode = "404", description = "User does not exist", content = @Content)
     })
     public UserDto getUserById(
@@ -49,8 +56,7 @@ public class UserController {
     @Operation(summary = "Register a user", description = "Creates a new user account. Email addresses must be unique.")
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "User registered successfully"),
-            @ApiResponse(responseCode = "400", description = "Request validation failed", content = @Content),
-            @ApiResponse(responseCode = "409", description = "Email address is already registered", content = @Content)
+            @ApiResponse(responseCode = "400", description = "Request validation failed or email address is already registered", content = @Content)
     })
     public ResponseEntity<?> registerUser(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(
@@ -65,8 +71,10 @@ public class UserController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update a user", description = "Updates the details of an existing user.")
+    @SecurityRequirement(name = "bearerAuth")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "User updated successfully"),
+            @ApiResponse(responseCode = "401", description = "Authentication is required", content = @Content),
             @ApiResponse(responseCode = "404", description = "User does not exist", content = @Content)
     })
     public UserDto updateUser(
@@ -80,8 +88,10 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a user", description = "Permanently deletes a user account by its ID.")
+    @SecurityRequirement(name = "bearerAuth")
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "User deleted successfully"),
+            @ApiResponse(responseCode = "401", description = "Authentication is required", content = @Content),
             @ApiResponse(responseCode = "404", description = "User does not exist", content = @Content)
     })
     public ResponseEntity<Void> deleteUser(
@@ -93,9 +103,10 @@ public class UserController {
 
     @PostMapping("/{id}/change-password")
     @Operation(summary = "Change a user's password", description = "Changes a user's password after validating the current password.")
+    @SecurityRequirement(name = "bearerAuth")
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "Password changed successfully"),
-            @ApiResponse(responseCode = "401", description = "Current password is incorrect", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Authentication is required or the current password is incorrect", content = @Content),
             @ApiResponse(responseCode = "404", description = "User does not exist", content = @Content)
     })
     public ResponseEntity<Void> changePassword(
