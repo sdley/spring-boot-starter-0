@@ -74,7 +74,7 @@ src/
    ./mvnw spring-boot:run
    ```
 
-Flyway applies the migrations at startup. The application is available at <http://localhost:8080>, and the OpenAPI Swagger UI is at <http://localhost:8080/swagger-ui/index.html>.
+Flyway applies the migrations at startup. The application is available at <http://localhost:8080>. The Swagger UI at <http://localhost:8080/swagger-ui/index.html> and OpenAPI specification at <http://localhost:8080/v3/api-docs> are public; protected API operations still require a JWT.
 
 To run the tests:
 
