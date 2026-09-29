@@ -15,7 +15,7 @@ A Spring Boot storefront backend with a product catalog, user registration and J
 - Stripe Checkout sessions and signed webhook handling
 - MySQL persistence with versioned Flyway migrations
 - Optional development seed data
-- Public static landing page and OpenAPI/Swagger UI
+- Public Thymeleaf landing page and OpenAPI/Swagger UI
 
 ## Tech stack
 
@@ -28,7 +28,7 @@ A Spring Boot storefront backend with a product catalog, user registration and J
 | Security | Spring Security, JWT, BCrypt |
 | Payments | Stripe Java SDK |
 | API documentation | springdoc OpenAPI / Swagger UI |
-| Web | Spring MVC, static HTML |
+| Web | Spring MVC, Thymeleaf |
 
 ## Project structure
 
@@ -47,7 +47,7 @@ src/
 │   │   └── users/       # Users, profiles, addresses, and user endpoints
 │   └── resources/
 │       ├── db/migration/ # Flyway SQL migrations
-│       ├── static/       # Public landing page
+│       ├── templates/    # Public Thymeleaf landing page
 │       └── application.yml
 └── test/java/            # Application, authentication, and seeder tests
 ```
@@ -74,7 +74,7 @@ src/
    ./mvnw spring-boot:run
    ```
 
-Flyway applies the migrations at startup. The public landing page is at <http://localhost:8080/> (also available at `/index.html`). The Swagger UI at <http://localhost:8080/swagger-ui/index.html> and OpenAPI specification at <http://localhost:8080/v3/api-docs> are public; protected API operations still require a JWT.
+Flyway applies the migrations at startup. The public Thymeleaf landing page is at <http://localhost:8080/> (also available at `/index.html`). The Swagger UI at <http://localhost:8080/swagger-ui/index.html> and OpenAPI specification at <http://localhost:8080/v3/api-docs> are public; protected API operations still require a JWT.
 
 To run the tests:
 
@@ -113,7 +113,7 @@ All API endpoints require authentication unless noted otherwise. Include the JWT
 
 | Method | Path | Purpose |
 | --- | --- | --- |
-| GET | `/`, `/index.html` | Public static landing page |
+| GET | `/`, `/index.html` | Public Thymeleaf landing page |
 | POST | `/auth/login` | Authenticate and issue an access token and refresh-token cookie |
 | POST | `/auth/refresh` | Refresh the access token using the refresh-token cookie |
 | GET | `/auth/me` | Get the authenticated user's profile |

@@ -8,16 +8,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import sn.sdley.storefrontbackend.admin.AdminController;
+import sn.sdley.storefrontbackend.common.HomeController;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.head;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(AdminController.class)
+@WebMvcTest({AdminController.class, HomeController.class})
 @Import({SecurityConfig.class, JwtAuthenticationFilter.class})
 class SecurityConfigTest {
     @Autowired
@@ -30,15 +30,13 @@ class SecurityConfigTest {
     private JwtService jwtService;
 
     @Test
-    void homePageAndStaticIndexArePublic() throws Exception {
-        mockMvc.perform(get("/"))
-                .andExpect(status().isOk())
-                .andExpect(forwardedUrl("index.html"));
-        mockMvc.perform(get("/index.html"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Build your storefront")));
-        mockMvc.perform(head("/")).andExpect(status().isOk());
-        mockMvc.perform(head("/index.html")).andExpect(status().isOk());
+    void homePageAndIndexArePublic() throws Exception {
+        for (var path : new String[]{"/", "/index.html"}) {
+            mockMvc.perform(get(path))
+                    .andExpect(status().isOk())
+                    .andExpect(content().string(containsString("Build your storefront")));
+            mockMvc.perform(head(path)).andExpect(status().isOk());
+        }
     }
 
     @Test
