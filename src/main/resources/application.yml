@@ -12,7 +12,7 @@ spring:
     show-sql: true
   jwt:
     secret: ${JWT_SECRET:your-strong-random-secret-here}
-    access-token-expiration: ${JWT_ACCESS_TOKEN_EXPIRATION:7200} # 2h
+    access-token-expiration: ${JWT_ACCESS_TOKEN_EXPIRATION:900} # 15m
     refresh-token-expiration: ${JWT_REFRESH_TOKEN_EXPIRATION:604800} # 7d
 stripe:
     secret-key: ${STRIPE_SECRET_KEY:your-stripe-api-key-here}
@@ -20,8 +20,6 @@ stripe:
 websiteUrl: ${WEBSITE_URL:http://localhost:4200}
 
 app:
-  page:
-    size: ${APP_PAGE_SIZE:10}
   seed:
     enabled: ${APP_SEED_ENABLED:false}
 
