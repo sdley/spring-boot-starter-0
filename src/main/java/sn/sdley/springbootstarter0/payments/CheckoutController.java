@@ -6,8 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sn.sdley.springbootstarter0.dtos.ErrorDto;
-import sn.sdley.springbootstarter0.exceptions.CartEmptyException;
-import sn.sdley.springbootstarter0.exceptions.CartNotFoundException;
+import sn.sdley.springbootstarter0.carts.CartEmptyException;
+import sn.sdley.springbootstarter0.carts.CartNotFoundException;
 
 import java.util.Map;
 

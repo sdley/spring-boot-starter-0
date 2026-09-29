@@ -1,7 +1,6 @@
-package sn.sdley.springbootstarter0.repositories;
+package sn.sdley.springbootstarter0.carts;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import sn.sdley.springbootstarter0.entities.Cart;
 
 import java.util.UUID;
 

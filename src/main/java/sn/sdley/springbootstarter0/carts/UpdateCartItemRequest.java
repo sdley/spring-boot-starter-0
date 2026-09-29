@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0.dtos;
+package sn.sdley.springbootstarter0.carts;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;

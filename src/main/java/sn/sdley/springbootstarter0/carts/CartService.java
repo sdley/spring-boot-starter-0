@@ -1,14 +1,8 @@
-package sn.sdley.springbootstarter0.service;
+package sn.sdley.springbootstarter0.carts;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import sn.sdley.springbootstarter0.dtos.CartDto;
-import sn.sdley.springbootstarter0.dtos.CartItemDto;
-import sn.sdley.springbootstarter0.entities.Cart;
-import sn.sdley.springbootstarter0.exceptions.CartNotFoundException;
 import sn.sdley.springbootstarter0.products.ProductNotFoundException;
-import sn.sdley.springbootstarter0.mappers.CartMapper;
-import sn.sdley.springbootstarter0.repositories.CartRepository;
 import sn.sdley.springbootstarter0.products.ProductRepository;
 
 import java.util.UUID;

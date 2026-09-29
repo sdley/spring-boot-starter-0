@@ -1,11 +1,7 @@
-package sn.sdley.springbootstarter0.mappers;
+package sn.sdley.springbootstarter0.carts;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import sn.sdley.springbootstarter0.dtos.CartDto;
-import sn.sdley.springbootstarter0.dtos.CartItemDto;
-import sn.sdley.springbootstarter0.entities.Cart;
-import sn.sdley.springbootstarter0.entities.CartItem;
 
 @Mapper(componentModel = "spring")
 public interface CartMapper {

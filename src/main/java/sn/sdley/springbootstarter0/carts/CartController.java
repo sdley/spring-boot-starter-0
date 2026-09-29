@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0.controller;
+package sn.sdley.springbootstarter0.carts;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -13,12 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import sn.sdley.springbootstarter0.dtos.AddItemToCartRequest;
-import sn.sdley.springbootstarter0.dtos.CartDto;
-import sn.sdley.springbootstarter0.dtos.CartItemDto;
-import sn.sdley.springbootstarter0.dtos.UpdateCartItemRequest;
-import sn.sdley.springbootstarter0.exceptions.CartNotFoundException;
 import sn.sdley.springbootstarter0.products.ProductNotFoundException;
-import sn.sdley.springbootstarter0.service.CartService;
 
 import java.util.Map;
 import java.util.UUID;
