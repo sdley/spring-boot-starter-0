@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Explore the Storefront API, its features, and interactive documentation.">
+    <meta name="theme-color" content="#142b32">
+    <title>Storefront API | Build commerce experiences</title>
+    <style>
+        :root {
+            color-scheme: light;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.6;
+            color: #193039;
+            background: #f6f7f3;
+        }
+
+        * { box-sizing: border-box; }
+        body { margin: 0; }
+        a { color: inherit; }
+        a:focus-visible { outline: 3px solid #e6a75d; outline-offset: 4px; }
+        .skip-link { position: absolute; top: -5rem; left: 1rem; padding: .75rem 1rem; background: #fff; z-index: 2; }
+        .skip-link:focus { top: 1rem; }
+        .container { width: min(1120px, calc(100% - 3rem)); margin-inline: auto; }
+
+        header, .hero { color: #f7f9f5; background: #142b32; }
+        header .container { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-block: 1.25rem; }
+        .brand { font-size: 1.15rem; font-weight: 800; letter-spacing: -.03em; text-decoration: none; }
+        nav a { color: #d5e3df; text-decoration: none; font-size: .92rem; }
+        nav a + a { margin-left: 1.5rem; }
+        nav a:hover, footer a:hover { text-decoration: underline; }
+
+        .hero { padding: 5rem 0 6rem; background: radial-gradient(circle at 80% 20%, #285653, #142b32 55%); }
+        .eyebrow { margin: 0 0 1rem; color: #b6e2c5; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; font-size: .78rem; }
+        h1, h2, h3, p { margin-top: 0; }
+        h1 { max-width: 16ch; font-size: clamp(2.8rem, 7vw, 5rem); line-height: 1.1; letter-spacing: -.055em; }
+        .lead { max-width: 62ch; color: #d5e3df; font-size: 1.15rem; }
+        .actions { display: flex; flex-wrap: wrap; gap: .85rem; margin-top: 2rem; }
+        .button { display: inline-block; padding: .8rem 1.25rem; border: 1px solid #b6e2c5; border-radius: .6rem; font-weight: 700; text-decoration: none; }
+        .button.primary { color: #142b32; background: #b6e2c5; }
+        .button:hover { filter: brightness(1.1); }
+
+        main section { padding-block: 4rem; }
+        h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -.04em; line-height: 1.2; }
+        .intro { max-width: 65ch; color: #435960; }
+        .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
+        .card { padding: 1.6rem; background: #fff; border: 1px solid #dbe4dc; border-radius: .9rem; }
+        .card h3 { margin-bottom: .5rem; }
+        .card p { margin-bottom: 0; color: #435960; }
+        .start { background: #eaf0e9; }
+        .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; padding: 0; list-style: none; }
+        .steps li { border-top: 2px solid #397265; padding-top: 1rem; }
+        .steps strong { display: block; margin-bottom: .4rem; }
+        .steps p { margin-bottom: 0; color: #435960; }
+        code { font-size: .9em; overflow-wrap: anywhere; }
+        footer { padding-block: 2rem; background: #142b32; color: #d5e3df; }
+        footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .75rem; }
+
+        @media (max-width: 700px) {
+            header .container { align-items: flex-start; flex-direction: column; }
+            nav a + a { margin-left: 1rem; }
+            .hero { padding-block: 3.5rem 4.5rem; }
+            .grid, .steps { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header>
+    <div class="container">
+        <a class="brand" href="/">Storefront API</a>
+        <nav aria-label="Primary navigation">
+            <a href="#features">Features</a>
+            <a href="#getting-started">Getting started</a>
+            <a href="/swagger-ui/index.html">API reference</a>
+        </nav>
+    </div>
+</header>
+
+<div class="hero">
+    <div class="container">
+        <p class="eyebrow">Commerce, ready to connect</p>
+        <h1>Build your storefront on a solid foundation.</h1>
+        <p class="lead">A REST API for products, customers, carts, orders, and Stripe Checkout. Explore the contract and start integrating with your own storefront.</p>
+        <div class="actions">
+            <a class="button primary" href="/swagger-ui/index.html">Explore the API</a>
+            <a class="button" href="/v3/api-docs">View OpenAPI JSON</a>
+        </div>
+    </div>
+</div>
+
+<main id="main">
+    <section id="features" class="container">
+        <h2>Everything behind the storefront</h2>
+        <p class="intro">Use the interactive API reference to inspect request schemas, responses, and authentication requirements before making a call.</p>
+        <div class="grid">
+            <article class="card">
+                <h3>Catalog</h3>
+                <p>Manage products and browse the catalog with optional category filtering.</p>
+            </article>
+            <article class="card">
+                <h3>Carts &amp; orders</h3>
+                <p>Build a cart, start checkout, and view orders for the signed-in customer.</p>
+            </article>
+            <article class="card">
+                <h3>Payments</h3>
+                <p>Create Stripe Checkout sessions and process signed payment webhooks.</p>
+            </article>
+        </div>
+    </section>
+
+    <section id="getting-started" class="start">
+        <div class="container">
+            <h2>Get started in three steps</h2>
+            <ol class="steps">
+                <li><strong>Explore the endpoints</strong><p>Open <a href="/swagger-ui/index.html">Swagger UI</a> to see available operations and payloads.</p></li>
+                <li><strong>Create an account</strong><p>Register with <code>POST /users</code>, then sign in with <code>POST /auth/login</code>.</p></li>
+                <li><strong>Use your access token</strong><p>Send <code>Authorization: Bearer &lt;token&gt;</code> for protected operations. Cart endpoints are public.</p></li>
+            </ol>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <span>Storefront API</span>
+        <a href="/swagger-ui/index.html">Interactive documentation</a>
+    </div>
+</footer>
+</body>
+</html>

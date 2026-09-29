@@ -15,7 +15,7 @@ A Spring Boot storefront backend with a product catalog, user registration and J
 - Stripe Checkout sessions and signed webhook handling
 - MySQL persistence with versioned Flyway migrations
 - Optional development seed data
-- Thymeleaf home page and OpenAPI/Swagger UI
+- Public static landing page and OpenAPI/Swagger UI
 
 ## Tech stack
 
@@ -28,7 +28,7 @@ A Spring Boot storefront backend with a product catalog, user registration and J
 | Security | Spring Security, JWT, BCrypt |
 | Payments | Stripe Java SDK |
 | API documentation | springdoc OpenAPI / Swagger UI |
-| Web | Spring MVC, Thymeleaf |
+| Web | Spring MVC, static HTML |
 
 ## Project structure
 
@@ -47,7 +47,7 @@ src/
 │   │   └── users/       # Users, profiles, addresses, and user endpoints
 │   └── resources/
 │       ├── db/migration/ # Flyway SQL migrations
-│       ├── templates/    # Thymeleaf templates
+│       ├── static/       # Public landing page
 │       └── application.yml
 └── test/java/            # Application, authentication, and seeder tests
 ```
@@ -74,7 +74,7 @@ src/
    ./mvnw spring-boot:run
    ```
 
-Flyway applies the migrations at startup. The application is available at <http://localhost:8080>. The Swagger UI at <http://localhost:8080/swagger-ui/index.html> and OpenAPI specification at <http://localhost:8080/v3/api-docs> are public; protected API operations still require a JWT.
+Flyway applies the migrations at startup. The public landing page is at <http://localhost:8080/> (also available at `/index.html`). The Swagger UI at <http://localhost:8080/swagger-ui/index.html> and OpenAPI specification at <http://localhost:8080/v3/api-docs> are public; protected API operations still require a JWT.
 
 To run the tests:
 
@@ -109,11 +109,11 @@ When `APP_SEED_ENABLED=true`, sample categories, products, users, profiles, addr
 
 ## API overview
 
-All endpoints require authentication unless noted otherwise. Include the JWT access token in the `Authorization` header for protected endpoints. Carts and Stripe webhooks are explicitly permitted without JWT by the current security configuration.
+All API endpoints require authentication unless noted otherwise. Include the JWT access token in the `Authorization` header for protected endpoints. The landing page, API documentation, carts, and Stripe webhooks are accessible without JWT.
 
 | Method | Path | Purpose |
 | --- | --- | --- |
-| GET | `/` | Render the home page |
+| GET | `/`, `/index.html` | Public static landing page |
 | POST | `/auth/login` | Authenticate and issue an access token and refresh-token cookie |
 | POST | `/auth/refresh` | Refresh the access token using the refresh-token cookie |
 | GET | `/auth/me` | Get the authenticated user's profile |

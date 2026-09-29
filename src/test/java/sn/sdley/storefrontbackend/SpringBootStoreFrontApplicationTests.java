@@ -31,17 +31,17 @@ class SpringBootStoreFrontApplicationTests {
     }
 
     @Test
-    void homePathForwardsToStaticIndexPage() throws Exception {
+    void homePathServesStaticLandingPage() throws Exception {
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
-                .andExpect(forwardedUrl("/index.html"));
+                .andExpect(forwardedUrl("index.html"));
     }
 
     @Test
     void staticIndexHtmlIsServedDirectly() throws Exception {
         mockMvc.perform(get("/index.html"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Welcome to the Home Page")));
+                .andExpect(content().string(containsString("Storefront API")));
     }
 
 }
