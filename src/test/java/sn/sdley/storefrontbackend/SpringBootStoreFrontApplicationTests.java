@@ -40,7 +40,10 @@ class SpringBootStoreFrontApplicationTests {
                 .andExpect(model().attribute("siteName", "Storefront API"))
                 .andExpect(content().string(containsString("<title>Storefront API | Build commerce experiences</title>")))
                 .andExpect(content().string(not(containsString("th:href"))))
-                .andExpect(content().string(containsString("Build your storefront")));
+                .andExpect(content().string(containsString("Build your storefront")))
+                .andExpect(content().string(containsString("Made with")))
+                .andExpect(content().string(containsString("href=\"https://sdley.github.io/\" target=\"_blank\" rel=\"noopener noreferrer\"")))
+                .andExpect(content().string(containsString("sdley (Souleymane DIALLO)")));
     }
 
     @Test
