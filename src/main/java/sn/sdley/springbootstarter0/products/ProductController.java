@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0.controller;
+package sn.sdley.springbootstarter0.products;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -10,11 +10,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import sn.sdley.springbootstarter0.dtos.ProductDto;
-import sn.sdley.springbootstarter0.entities.Product;
-import sn.sdley.springbootstarter0.mappers.ProductMapper;
-import sn.sdley.springbootstarter0.repositories.CategoryRepository;
-import sn.sdley.springbootstarter0.repositories.ProductRepository;
 
 import java.util.List;
 

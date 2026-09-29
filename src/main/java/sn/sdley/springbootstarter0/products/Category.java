@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0.entities;
+package sn.sdley.springbootstarter0.products;
 
 import jakarta.persistence.*;
 import lombok.Getter;

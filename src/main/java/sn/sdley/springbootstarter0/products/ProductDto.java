@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0.dtos;
+package sn.sdley.springbootstarter0.products;
 
 import lombok.Data;
 

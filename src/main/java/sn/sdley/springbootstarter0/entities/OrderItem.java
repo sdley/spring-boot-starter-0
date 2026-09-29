@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import sn.sdley.springbootstarter0.products.Product;
 
 import java.math.BigDecimal;
 

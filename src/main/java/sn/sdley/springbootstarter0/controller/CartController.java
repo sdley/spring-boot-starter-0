@@ -17,7 +17,7 @@ import sn.sdley.springbootstarter0.dtos.CartDto;
 import sn.sdley.springbootstarter0.dtos.CartItemDto;
 import sn.sdley.springbootstarter0.dtos.UpdateCartItemRequest;
 import sn.sdley.springbootstarter0.exceptions.CartNotFoundException;
-import sn.sdley.springbootstarter0.exceptions.ProductNotFoundException;
+import sn.sdley.springbootstarter0.products.ProductNotFoundException;
 import sn.sdley.springbootstarter0.service.CartService;
 
 import java.util.Map;

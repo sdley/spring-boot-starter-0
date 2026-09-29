@@ -1,10 +1,8 @@
-package sn.sdley.springbootstarter0.mappers;
+package sn.sdley.springbootstarter0.products;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import sn.sdley.springbootstarter0.dtos.ProductDto;
-import sn.sdley.springbootstarter0.entities.Product;
 
 @Mapper(componentModel = "spring")
 public interface ProductMapper {

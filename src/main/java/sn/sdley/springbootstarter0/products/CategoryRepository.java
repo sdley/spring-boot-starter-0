@@ -1,7 +1,6 @@
-package sn.sdley.springbootstarter0.repositories;
+package sn.sdley.springbootstarter0.products;
 
 import org.springframework.data.repository.CrudRepository;
-import sn.sdley.springbootstarter0.entities.Category;
 
 public interface CategoryRepository extends CrudRepository<Category, Byte> {
 }

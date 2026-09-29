@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0.exceptions;
+package sn.sdley.springbootstarter0.products;
 
 public class ProductNotFoundException extends RuntimeException {
 }

@@ -1,9 +1,8 @@
-package sn.sdley.springbootstarter0.repositories;
+package sn.sdley.springbootstarter0.products;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import sn.sdley.springbootstarter0.entities.Product;
 
 import java.util.List;
 

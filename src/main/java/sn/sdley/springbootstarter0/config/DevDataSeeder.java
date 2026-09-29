@@ -8,12 +8,12 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import sn.sdley.springbootstarter0.users.Address;
-import sn.sdley.springbootstarter0.entities.Category;
-import sn.sdley.springbootstarter0.entities.Product;
+import sn.sdley.springbootstarter0.products.Category;
+import sn.sdley.springbootstarter0.products.Product;
 import sn.sdley.springbootstarter0.users.Profile;
 import sn.sdley.springbootstarter0.users.User;
-import sn.sdley.springbootstarter0.repositories.CategoryRepository;
-import sn.sdley.springbootstarter0.repositories.ProductRepository;
+import sn.sdley.springbootstarter0.products.CategoryRepository;
+import sn.sdley.springbootstarter0.products.ProductRepository;
 import sn.sdley.springbootstarter0.users.ProfileRepository;
 import sn.sdley.springbootstarter0.users.UserRepository;
 

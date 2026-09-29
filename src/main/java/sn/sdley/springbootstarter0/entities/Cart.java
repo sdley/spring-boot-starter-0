@@ -3,6 +3,7 @@ package sn.sdley.springbootstarter0.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import sn.sdley.springbootstarter0.products.Product;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
