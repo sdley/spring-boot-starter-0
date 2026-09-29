@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0.controller;
+package sn.sdley.springbootstarter0.admin;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
