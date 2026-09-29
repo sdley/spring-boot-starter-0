@@ -1,6 +1,6 @@
 package sn.sdley.springbootstarter0.payments;
 
-import sn.sdley.springbootstarter0.entities.Order;
+import sn.sdley.springbootstarter0.orders.Order;
 
 import java.util.Optional;
 

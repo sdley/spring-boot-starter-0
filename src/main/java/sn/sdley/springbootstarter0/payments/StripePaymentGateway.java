@@ -9,9 +9,9 @@ import com.stripe.net.Webhook;
 import com.stripe.param.checkout.SessionCreateParams;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import sn.sdley.springbootstarter0.entities.Order;
-import sn.sdley.springbootstarter0.entities.OrderItem;
-import sn.sdley.springbootstarter0.entities.PaymentStatus;
+import sn.sdley.springbootstarter0.orders.Order;
+import sn.sdley.springbootstarter0.orders.OrderItem;
+import sn.sdley.springbootstarter0.orders.PaymentStatus;
 
 import java.math.BigDecimal;
 import java.util.Optional;

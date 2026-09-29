@@ -1,10 +1,9 @@
-package sn.sdley.springbootstarter0.repositories;
+package sn.sdley.springbootstarter0.orders;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import sn.sdley.springbootstarter0.entities.Order;
 import sn.sdley.springbootstarter0.users.User;
 
 import java.util.List;

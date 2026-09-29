@@ -3,11 +3,11 @@ package sn.sdley.springbootstarter0.payments;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sn.sdley.springbootstarter0.entities.Order;
+import sn.sdley.springbootstarter0.orders.Order;
 import sn.sdley.springbootstarter0.carts.CartEmptyException;
 import sn.sdley.springbootstarter0.carts.CartNotFoundException;
 import sn.sdley.springbootstarter0.carts.CartRepository;
-import sn.sdley.springbootstarter0.repositories.OrderRepository;
+import sn.sdley.springbootstarter0.orders.OrderRepository;
 import sn.sdley.springbootstarter0.auth.AuthService;
 import sn.sdley.springbootstarter0.carts.CartService;
 

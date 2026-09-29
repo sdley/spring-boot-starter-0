@@ -2,7 +2,7 @@ package sn.sdley.springbootstarter0.payments;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import sn.sdley.springbootstarter0.entities.PaymentStatus;
+import sn.sdley.springbootstarter0.orders.PaymentStatus;
 
 @AllArgsConstructor
 @Getter

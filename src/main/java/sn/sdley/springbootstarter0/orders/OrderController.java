@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0.controller;
+package sn.sdley.springbootstarter0.orders;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -6,9 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
 import sn.sdley.springbootstarter0.dtos.ErrorDto;
-import sn.sdley.springbootstarter0.dtos.OrderDto;
-import sn.sdley.springbootstarter0.exceptions.OrderNotFoundException;
-import sn.sdley.springbootstarter0.service.OrderService;
 
 import java.util.List;
 
