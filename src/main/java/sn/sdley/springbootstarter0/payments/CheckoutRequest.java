@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0.dtos;
+package sn.sdley.springbootstarter0.payments;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

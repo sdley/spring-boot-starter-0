@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0.service;
+package sn.sdley.springbootstarter0.payments;
 
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import sn.sdley.springbootstarter0.entities.Order;
 import sn.sdley.springbootstarter0.entities.OrderItem;
 import sn.sdley.springbootstarter0.entities.PaymentStatus;
-import sn.sdley.springbootstarter0.exceptions.PaymentException;
 
 import java.math.BigDecimal;
 import java.util.Optional;

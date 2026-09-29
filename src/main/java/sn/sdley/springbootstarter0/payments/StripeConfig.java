@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0.config;
+package sn.sdley.springbootstarter0.payments;
 
 import com.stripe.Stripe;
 import jakarta.annotation.PostConstruct;

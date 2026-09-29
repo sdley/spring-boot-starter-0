@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0.exceptions;
+package sn.sdley.springbootstarter0.payments;
 
 import lombok.NoArgsConstructor;
 

@@ -1,18 +1,13 @@
-package sn.sdley.springbootstarter0.controller;
+package sn.sdley.springbootstarter0.payments;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import sn.sdley.springbootstarter0.dtos.CheckoutRequest;
-import sn.sdley.springbootstarter0.dtos.CheckoutResponse;
 import sn.sdley.springbootstarter0.dtos.ErrorDto;
 import sn.sdley.springbootstarter0.exceptions.CartEmptyException;
 import sn.sdley.springbootstarter0.exceptions.CartNotFoundException;
-import sn.sdley.springbootstarter0.exceptions.PaymentException;
-import sn.sdley.springbootstarter0.service.CheckoutService;
-import sn.sdley.springbootstarter0.service.WebhookRequest;
 
 import java.util.Map;
 

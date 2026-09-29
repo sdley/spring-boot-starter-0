@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0.service;
+package sn.sdley.springbootstarter0.payments;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,16 +1,15 @@
-package sn.sdley.springbootstarter0.service;
+package sn.sdley.springbootstarter0.payments;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sn.sdley.springbootstarter0.dtos.CheckoutRequest;
-import sn.sdley.springbootstarter0.dtos.CheckoutResponse;
 import sn.sdley.springbootstarter0.entities.Order;
 import sn.sdley.springbootstarter0.exceptions.CartEmptyException;
 import sn.sdley.springbootstarter0.exceptions.CartNotFoundException;
-import sn.sdley.springbootstarter0.exceptions.PaymentException;
 import sn.sdley.springbootstarter0.repositories.CartRepository;
 import sn.sdley.springbootstarter0.repositories.OrderRepository;
+import sn.sdley.springbootstarter0.service.AuthService;
+import sn.sdley.springbootstarter0.service.CartService;
 
 @RequiredArgsConstructor
 @Service
