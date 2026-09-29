@@ -15,9 +15,9 @@ import org.springframework.web.server.ResponseStatusException;
 import sn.sdley.springbootstarter0.config.JwtConfig;
 import sn.sdley.springbootstarter0.dtos.JwtResponse;
 import sn.sdley.springbootstarter0.dtos.LoginRequest;
-import sn.sdley.springbootstarter0.dtos.UserDto;
-import sn.sdley.springbootstarter0.mappers.UserMapper;
-import sn.sdley.springbootstarter0.repositories.UserRepository;
+import sn.sdley.springbootstarter0.users.UserDto;
+import sn.sdley.springbootstarter0.users.UserMapper;
+import sn.sdley.springbootstarter0.users.UserRepository;
 import sn.sdley.springbootstarter0.service.JwtService;
 
 @AllArgsConstructor

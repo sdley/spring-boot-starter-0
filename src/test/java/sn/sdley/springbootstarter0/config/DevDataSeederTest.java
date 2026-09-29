@@ -7,8 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import sn.sdley.springbootstarter0.repositories.CategoryRepository;
 import sn.sdley.springbootstarter0.repositories.ProductRepository;
-import sn.sdley.springbootstarter0.repositories.ProfileRepository;
-import sn.sdley.springbootstarter0.repositories.UserRepository;
+import sn.sdley.springbootstarter0.users.ProfileRepository;
+import sn.sdley.springbootstarter0.users.UserRepository;
 
 import java.util.stream.StreamSupport;
 

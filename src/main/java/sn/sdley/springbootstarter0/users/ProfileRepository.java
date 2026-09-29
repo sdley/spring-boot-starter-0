@@ -1,7 +1,6 @@
-package sn.sdley.springbootstarter0.repositories;
+package sn.sdley.springbootstarter0.users;
 
 import org.springframework.data.repository.CrudRepository;
-import sn.sdley.springbootstarter0.entities.Profile;
 
 public interface ProfileRepository extends CrudRepository<Profile, Long> {
 }

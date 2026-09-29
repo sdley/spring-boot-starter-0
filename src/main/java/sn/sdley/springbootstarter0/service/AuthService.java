@@ -3,8 +3,8 @@ package sn.sdley.springbootstarter0.service;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import sn.sdley.springbootstarter0.entities.User;
-import sn.sdley.springbootstarter0.repositories.UserRepository;
+import sn.sdley.springbootstarter0.users.User;
+import sn.sdley.springbootstarter0.users.UserRepository;
 
 @AllArgsConstructor
 @Service

@@ -3,12 +3,10 @@ package sn.sdley.springbootstarter0.service;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import sn.sdley.springbootstarter0.config.JwtConfig;
-import sn.sdley.springbootstarter0.entities.Role;
-import sn.sdley.springbootstarter0.entities.User;
+import sn.sdley.springbootstarter0.users.User;
 
 import java.util.Date;
 

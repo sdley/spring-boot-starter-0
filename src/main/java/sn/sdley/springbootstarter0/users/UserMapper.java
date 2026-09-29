@@ -1,12 +1,8 @@
-package sn.sdley.springbootstarter0.mappers;
+package sn.sdley.springbootstarter0.users;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import sn.sdley.springbootstarter0.dtos.RegisterUserRequest;
-import sn.sdley.springbootstarter0.dtos.UpdateUserRequest;
-import sn.sdley.springbootstarter0.dtos.UserDto;
-import sn.sdley.springbootstarter0.entities.User;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {

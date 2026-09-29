@@ -1,11 +1,9 @@
-package sn.sdley.springbootstarter0.repositories;
+package sn.sdley.springbootstarter0.users;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.jpa.repository.JpaRepository;
-import sn.sdley.springbootstarter0.entities.User;
 
-import javax.imageio.spi.ServiceRegistry;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {

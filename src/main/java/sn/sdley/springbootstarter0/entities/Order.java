@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import sn.sdley.springbootstarter0.users.User;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

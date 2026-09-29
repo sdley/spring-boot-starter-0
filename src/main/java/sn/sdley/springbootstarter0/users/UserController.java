@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0.controller;
+package sn.sdley.springbootstarter0.users;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -14,13 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import sn.sdley.springbootstarter0.dtos.ChangePasswordRequest;
-import sn.sdley.springbootstarter0.dtos.RegisterUserRequest;
-import sn.sdley.springbootstarter0.dtos.UpdateUserRequest;
-import sn.sdley.springbootstarter0.dtos.UserDto;
 import sn.sdley.springbootstarter0.entities.Role;
-import sn.sdley.springbootstarter0.mappers.UserMapper;
-import sn.sdley.springbootstarter0.repositories.UserRepository;
 
 import java.util.Map;
 import java.util.Set;
