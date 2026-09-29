@@ -8,26 +8,20 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import sn.sdley.springbootstarter0.entities.Role;
 
 import java.util.Map;
-import java.util.Set;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/users")
 @Tag(name = "Users", description = "Endpoints for managing user accounts")
 public class UserController {
-
-    private final UserRepository userRepository;
-    private final UserMapper userMapper;
-    private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
 
     @GetMapping
     @Operation(summary = "List users", description = "Retrieves all users, sorted by ID, name, or email.")
@@ -36,15 +30,7 @@ public class UserController {
             @Parameter(description = "Sort field: id, name, or email. Unsupported values default to id.")
             @RequestParam(required = false, defaultValue = "", name = "sort") String sortBy
     ) {
-        if (!Set.of("name", "email").contains(sortBy)) {
-            sortBy = "id";
-        }
-
-        return userRepository.findAll(Sort.by(sortBy))
-                .stream()
-                // .map(user -> userMapper.toDto(user))
-                .map(userMapper::toDto)
-                .toList();
+        return userService.getAllUsers(sortBy);
     }
 
     @GetMapping("/{id}")
@@ -53,15 +39,10 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "User retrieved successfully"),
             @ApiResponse(responseCode = "404", description = "User does not exist", content = @Content)
     })
-    public ResponseEntity<UserDto> getUserById(
+    public UserDto getUserById(
             @Parameter(description = "The ID of the user to retrieve", required = true)
             @PathVariable Long id) {
-        var user = userRepository.findById(id).orElse(null);
-
-        if (user == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(userMapper.toDto(user));
+        return userService.getUser(id);
     }
 
     @PostMapping
@@ -77,19 +58,9 @@ public class UserController {
             @Valid @RequestBody RegisterUserRequest request,
             UriComponentsBuilder uriComponentsBuilder
     ) {
-        if (userRepository.existsByEmail(request.getEmail())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(
-                    Map.of("error", "Email already exists")
-            );
-        }
-
-        var user = userMapper.toEntity(request);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(Role.USER);
-        user = userRepository.save(user);
-        var userDto = userMapper.toDto(user);
-        var location = uriComponentsBuilder.path("/users/{id}").buildAndExpand(userDto.getId()).toUri();
-        return ResponseEntity.created(location).body(userDto);
+        var userDto = userService.registerUser(request);
+        var uri = uriComponentsBuilder.path("/users/{id}").buildAndExpand(userDto.getId()).toUri();
+        return ResponseEntity.created(uri).body(userDto);
     }
 
     @PutMapping("/{id}")
@@ -98,21 +69,13 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "User updated successfully"),
             @ApiResponse(responseCode = "404", description = "User does not exist", content = @Content)
     })
-    public ResponseEntity<UserDto> updateUser(
+    public UserDto updateUser(
             @Parameter(description = "The ID of the user to update", required = true)
             @PathVariable(name = "id") Long id,
             @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Updated user details", required = true)
             @RequestBody UpdateUserRequest request) {
-        var user = userRepository.findById(id).orElse(null);
-        if (user == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        userMapper.update(request, user);
-        user = userRepository.save(user);
-
-        return ResponseEntity.ok(userMapper.toDto(user));
+        return userService.updateUser(id, request);
     }
 
     @DeleteMapping("/{id}")
@@ -124,12 +87,7 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(
             @Parameter(description = "The ID of the user to delete", required = true)
             @PathVariable Long id) {
-        var user = userRepository.findById(id).orElse(null);
-        if (user == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        userRepository.delete(user);
+        userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
 
@@ -146,19 +104,25 @@ public class UserController {
             @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Current and replacement passwords", required = true)
             @RequestBody ChangePasswordRequest request) {
-        var user = userRepository.findById(id).orElse(null);
-        if (user == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        if (!user.getPassword().equals(request.getOldPassword())) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
-
-        user.setPassword(request.getNewPassword());
-        userRepository.save(user);
+        userService.changePassword(id, request);
         return ResponseEntity.noContent().build();
+    }
 
+    @ExceptionHandler(DuplicateUserException.class)
+    public ResponseEntity<Map<String, String>> handleDuplicateUser() {
+        return ResponseEntity.badRequest().body(
+                Map.of("email", "Email is already registered.")
+        );
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Void> handleUserNotFound() {
+        return ResponseEntity.notFound().build();
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<Void> handleAccessDenied() {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
 }
