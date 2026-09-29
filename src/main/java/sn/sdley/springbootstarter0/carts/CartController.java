@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import sn.sdley.springbootstarter0.dtos.AddItemToCartRequest;
 import sn.sdley.springbootstarter0.products.ProductNotFoundException;
 
 import java.util.Map;

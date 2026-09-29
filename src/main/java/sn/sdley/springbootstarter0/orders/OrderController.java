@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
-import sn.sdley.springbootstarter0.dtos.ErrorDto;
+import sn.sdley.springbootstarter0.common.ErrorDto;
 
 import java.util.List;
 
