@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0.validation;
+package sn.sdley.springbootstarter0.users;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

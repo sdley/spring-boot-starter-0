@@ -3,7 +3,6 @@ package sn.sdley.springbootstarter0.users;
 import jakarta.persistence.*;
 import lombok.*;
 import sn.sdley.springbootstarter0.products.Product;
-import sn.sdley.springbootstarter0.entities.Role;
 
 import java.util.ArrayList;
 import java.util.HashSet;

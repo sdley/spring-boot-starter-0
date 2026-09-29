@@ -5,7 +5,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import sn.sdley.springbootstarter0.entities.Role;
 
 import java.util.Set;
 
