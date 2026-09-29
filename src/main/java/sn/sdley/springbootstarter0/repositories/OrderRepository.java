@@ -8,9 +8,14 @@ import sn.sdley.springbootstarter0.entities.Order;
 import sn.sdley.springbootstarter0.entities.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
     @EntityGraph(attributePaths = {"items", "items.product"})
     @Query("SELECT o FROM Order o WHERE o.customer = :customer")
-    List<Order> getAllByCustomer(@Param("customer") User customer);
+    List<Order> getOrdersByCustomer(@Param("customer") User customer);
+
+    @EntityGraph(attributePaths = "items.product")
+    @Query("SELECT o FROM Order o WHERE o.id = :orderId")
+    Optional<Order> getOrderWithItems(@Param("orderId") Long orderId);
 }
