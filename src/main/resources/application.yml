@@ -16,6 +16,7 @@ spring:
     refresh-token-expiration: ${JWT_REFRESH_TOKEN_EXPIRATION:604800} # 7d
 stripe:
     secret-key: ${STRIPE_SECRET_KEY:your-stripe-api-key-here}
+websiteUrl: ${WEBSITE_URL:http://localhost:4200}
 
 app:
   page:
