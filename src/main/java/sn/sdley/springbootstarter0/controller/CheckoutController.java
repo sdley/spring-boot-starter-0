@@ -4,7 +4,6 @@ import com.stripe.exception.SignatureVerificationException;
 import com.stripe.model.PaymentIntent;
 import com.stripe.net.Webhook;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -42,7 +41,6 @@ public class CheckoutController {
     ){
         try {
             var event = Webhook.constructEvent(payload, signature, webhookSecretKey);
-            System.out.println("Received event: " + event.getType());
 
             var stripeObject = event.getDataObjectDeserializer().getObject().orElse(null);
 
