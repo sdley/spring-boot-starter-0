@@ -1,11 +1,10 @@
-package sn.sdley.springbootstarter0.controller;
+package sn.sdley.springbootstarter0.common;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import sn.sdley.springbootstarter0.dtos.ErrorDto;
 
 import java.util.HashMap;
 import java.util.Map;

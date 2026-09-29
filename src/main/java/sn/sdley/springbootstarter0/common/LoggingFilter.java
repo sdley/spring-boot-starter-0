@@ -1,4 +1,4 @@
-package sn.sdley.springbootstarter0.filters;
+package sn.sdley.springbootstarter0.common;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
