@@ -10,7 +10,7 @@
     </parent>
     <groupId>sn.sdley</groupId>
     <artifactId>spring-boot-starter-0</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>spring-boot-starter-0</name>
     <description>spring-boot-starter-0</description>
     <url/>
@@ -169,13 +169,8 @@
                         </path>
                         <path>
                             <groupId>org.mapstruct</groupId>
-                            <artifactId>mapstruct-processor</artifactId>
+                            <artifactId>mapstruct</artifactId>
                             <version>1.6.3</version>
-                        </path>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok-mapstruct-binding</artifactId>
-                            <version>0.2.0</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
