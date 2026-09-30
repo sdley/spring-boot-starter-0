@@ -10,6 +10,9 @@ spring:
   profiles:
     active:
       - ${SPRING_PROFILES_ACTIVE:dev}
+  flyway:
+    user: ${FLYWAY_USER}
+    password: ${FLYWAY_PASSWORD}
 stripe:
     secret-key: ${STRIPE_SECRET_KEY:your-stripe-api-key-here}
     webhook-secret-key: ${STRIPE_WEBHOOK_SECRET_KEY:your-stripe-webhook-secret-here}
@@ -17,6 +20,3 @@ websiteUrl: ${WEBSITE_URL:http://localhost:4200}
 app:
   seed:
     enabled: ${APP_SEED_ENABLED:false}
-flyway:
-  user: ${FLYWAY_USER:root}
-  password: ${FLYWAY_PASSWORD:root}

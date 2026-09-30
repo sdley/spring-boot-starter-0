@@ -24,7 +24,8 @@ import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(properties = {"app.seed.enabled=false", "spring.jpa.hibernate.ddl-auto=validate"})
+@SpringBootTest(properties = {"app.seed.enabled=false", "spring.jpa.hibernate.ddl-auto=validate",
+        "spring.flyway.user=test", "spring.flyway.password=test"})
 @AutoConfigureMockMvc
 @Import(MySqlTestConfiguration.class)
 class StorefrontPersistenceIntegrationTest {

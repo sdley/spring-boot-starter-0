@@ -19,7 +19,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
-@SpringBootTest(properties = {"app.seed.enabled=false", "spring.jpa.hibernate.ddl-auto=validate"})
+@SpringBootTest(properties = {"app.seed.enabled=false", "spring.jpa.hibernate.ddl-auto=validate",
+        "spring.flyway.user=test", "spring.flyway.password=test"})
 @AutoConfigureMockMvc
 @Import(MySqlTestConfiguration.class)
 class SpringBootStoreFrontApplicationTests {

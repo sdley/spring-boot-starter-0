@@ -99,13 +99,15 @@ The application imports an optional `.env` file from the project root. These set
 | `JWT_ACCESS_TOKEN_EXPIRATION` | Access-token lifetime in seconds | `900` |
 | `JWT_REFRESH_TOKEN_EXPIRATION` | Refresh-token lifetime in seconds | `604800` |
 | `APP_SEED_ENABLED` | Enable sample data on an empty database | `false` |
-| `FLYWAY_USER` | Database user used by Flyway | `root` |
-| `FLYWAY_PASSWORD` | Database password used by Flyway | `root` |
+| `FLYWAY_USER` | Database user used by startup Flyway migrations | `root` in dev; required in prod |
+| `FLYWAY_PASSWORD` | Database password used by startup Flyway migrations | `root` in dev; required in prod |
 | `STRIPE_SECRET_KEY` | Stripe API secret key | Placeholder; replace it |
 | `STRIPE_WEBHOOK_SECRET_KEY` | Stripe webhook signing secret | Placeholder; replace it |
 | `WEBSITE_URL` | Frontend base URL used for Checkout return URLs | `http://localhost:4200` |
 
 Use test-mode Stripe credentials for development. Never commit `.env`, production credentials, or real secrets. Generate a unique strong `JWT_SECRET` and use a secret manager for deployed environments.
+
+Startup migrations use `spring.flyway.user` and `spring.flyway.password`, configured through `FLYWAY_USER` and `FLYWAY_PASSWORD`. The `root` defaults are only for the included local development database; supply both variables in production using a dedicated migration account with only the privileges its migrations need. The Maven `flyway:*` commands are configured separately in `pom.xml` and currently use `DB_URL`, `DB_USERNAME`, and `DB_PASSWORD`.
 
 When `APP_SEED_ENABLED=true`, sample categories, products, users, profiles, addresses, and wishlists are created only if the related tables have no existing data. Seeded accounts are development-only and must not be used in production.
 
